@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  
+    <title>Ether Empire</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+
+    
+    <section class="wrapper">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+        
+    </section>
+    
+    <h1>𝑬𝑻𝑯𝑬𝑹 𝑬𝑴𝑷𝑰𝑹𝑬</h1>
+    <button onclick="accessToMetamask()">CONNECT METAMASK</button> <br>
+    
+    <p class="Wallet" id="conditionalText"></p>
+    <p class="direccion" id="accountArea"></p>
+    <p class="balance" id="balance"></p>
+    <a class="HOLA" id="Conectado"></a>
+    
+    <script>
+        
+        //If I take accessToMetamask function part out, then the code will still work. 
+        //However I will not be able to call a write method. Because I would not have an 
+        //account to send gas.
+        let account;
+        const accessToMetamask = async () => {
+            if(window.ethereum !== "undefined") {
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+                // Crear una instancia de Web3
+                const web3 = new Web3(window.ethereum);
+
+                // Obtener la dirección de la cuenta actual
+                const acco = await web3.eth.getAccounts();
+                const accoAddress = acco[0];
+
+                const accounts = await ethereum.request({ method: "eth_requestAccounts"});
+                const balance = await web3.eth.getBalance(accoAddress);
+                account = accounts[0];
+                const balanceInEther = web3.utils.fromWei(balance, 'ether');
+                if (account >0)
+                {
+                    document.getElementById("conditionalText").innerHTML = "Wallet:";
+                    document.getElementById("Conectado").innerHTML = "𝘾𝙊𝙉𝙀𝘾𝙏𝘼𝘿𝙊 𝘾𝙊𝙍𝙍𝙀𝘾𝙏𝘼𝙈𝙀𝙉𝙏𝙀";
+                }
+                document.getElementById("accountArea").innerHTML = account;
+                document.getElementById('balance').innerText = `Balance: ${balanceInEther} ETH`;
+                
+            }
+        }
+    </script>
+
+    <a  class="clasedeplay" href="https://rigobery.github.io/index.html" id="descargarJuego" download="nombre_del_archivo.zip">
+        <button >PLAY</button>
+    </a>
+
+
+
+
+    
+</body>
+</html>
